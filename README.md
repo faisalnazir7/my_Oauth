@@ -29,4 +29,13 @@ Download or clone repositories to your system and cd into directory.
   nodemon app.js
 
 ```
+
+You need to create .env file in the directory in which you can store your own clientID and clientSecret as :
+```bash
+  CLIENT_ID=
+  CLIENT_SECRET=
+
+```
+
+
 App will be ready at http://localhost:3000/
