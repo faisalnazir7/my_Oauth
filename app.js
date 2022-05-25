@@ -30,7 +30,7 @@ app.use(passport.session());
 
 mongoose.connect('mongodb://localhost:27017/userDB');
 
-
+//Schema......................................................................
 const userSchema = new mongoose.Schema(
     {
         email: String,
@@ -48,6 +48,9 @@ const User = mongoose.model("User", userSchema);
 
 passport.use(User.createStrategy());
 
+
+
+//Serializer and deserializer.............................................................
 passport.serializeUser(function(user, cb) {
     process.nextTick(function() {
       cb(null, { id: user.id, username: user.username, name: user.name });
@@ -63,7 +66,7 @@ passport.serializeUser(function(user, cb) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/secrets"
+    callbackURL: "http://localhost:3000/auth/google/secrets"       //callback URL is for localhost
   },
   function(accessToken, refreshToken, profile, cb) {
     console.log(profile);
@@ -132,6 +135,9 @@ app.post("/submit", function(req, res){
     });
 });
 
+
+
+//LOGOUT ...........................................................................................................
 app.get("/logout", function(req, res){
     req.logout();
     res.redirect("/");
@@ -152,6 +158,9 @@ app.post("/register", function(req, res){
    
 });
 
+
+
+// LOGIN ...................................................................................................
 app.post("/login", function(req, res){
     const user = new User({
         username: req.body.username,
